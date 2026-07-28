@@ -275,43 +275,129 @@ font-size:30px;
 }
 
 .student-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+margin-top:40px;
+
+align-items:stretch;
+
 }
 
 .card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+    background:transparent;
+    border:none;
+    padding:0;
+    height:380px;
+    perspective:1000px;
+}
+
+.card-inner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transition:.8s;
+    transform-style:preserve-3d;
+}
+
+.card:hover .card-inner{
+    transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
     border-radius:20px;
-    padding:30px;
-    text-align:center;
-    transition:.3s;
-    backdrop-filter:blur(10px);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    backface-visibility:hidden;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+    padding:25px;
 }
 
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 10px 30px rgba(59,130,246,.3);
-}
+.card-front img{
 
-.card img{
     width:120px;
     height:120px;
-    border-radius:50%;
+
     object-fit:cover;
-    margin-bottom:20px;
+
+    border-radius:50%;
+
     border:4px solid #3b82f6;
+
+    margin-bottom:20px;
 }
 
-.card h2{
+.card-front h2{
     color:#60a5fa;
-    margin-bottom:10px;
 }
 
-.card p{
+.card-front p{
     color:white;
 }
+
+.card-back{
+
+    transform:rotateY(180deg);
+
+    text-align:center;
+}
+
+.card-back h3{
+    color:#60a5fa;
+    margin-bottom:15px;
+}
+
+.card-back hr{
+    width:80%;
+    margin:12px auto;
+    border:.5px solid rgba(255,255,255,.2);
+}
+
+.card-back p{
+    margin:6px 0;
+}
+
+.badge{
+
+    margin-top:15px;
+
+    background:#2563eb;
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    font-weight:600;
+}
+
+.school{
+    margin-top:15px;
+    color:#60a5fa;
+}
+
 /* ========================= */
 /*       WALI KELAS          */
 /* ========================= */
@@ -629,5 +715,301 @@ transition:1s;
 opacity:1;
 
 transform:translateY(0);
+
+}
+/* ========================================= */
+/*            HALAMAN JADWAL                 */
+/* ========================================= */
+
+.jadwal{
+    padding:140px 8% 80px;
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top,#2563eb55,transparent 40%),
+    linear-gradient(135deg,#020617,#111827);
+}
+
+.jadwal h1{
+    text-align:center;
+    font-size:46px;
+    margin-bottom:10px;
+    color:#ffffff;
+}
+
+.subtitle{
+    text-align:center;
+    color:#9ca3af;
+    margin-bottom:50px;
+    font-size:18px;
+}
+
+.hari{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    padding:30px;
+    margin-bottom:45px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.35s;
+}
+
+.hari:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 35px rgba(59,130,246,.45);
+}
+
+.hari h2{
+    margin-bottom:25px;
+    color:#60a5fa;
+    font-size:30px;
+    text-align:center;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px;
+
+    font-size:17px;
+}
+
+table td{
+
+    padding:14px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    color:#f3f4f6;
+
+    transition:.25s;
+}
+
+table tr:nth-child(even){
+
+    background:rgba(255,255,255,.03);
+}
+
+table tr:hover{
+
+    background:rgba(59,130,246,.18);
+
+    transform:scale(1.01);
+}
+
+.istirahat{
+
+    background:#f59e0b !important;
+
+    color:#111827 !important;
+
+    font-weight:bold;
+}
+
+.sholat{
+
+    background:#22c55e !important;
+
+    color:white !important;
+
+    font-weight:bold;
+}
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(50px);
+
+    transition:all .8s ease;
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:900px){
+
+.jadwal{
+
+padding:130px 15px 50px;
+
+}
+
+.jadwal h1{
+
+font-size:34px;
+
+}
+
+.hari{
+
+padding:20px;
+
+}
+
+.hari h2{
+
+font-size:24px;
+
+}
+
+table{
+
+display:block;
+
+overflow-x:auto;
+
+white-space:nowrap;
+
+}
+
+table th{
+
+font-size:15px;
+
+}
+
+table td{
+
+font-size:14px;
+
+padding:12px;
+
+}
+
+}
+/* ========================= */
+/* RESPONSIVE STUDENT GRID   */
+/* ========================= */
+
+@media (max-width:1200px){
+
+.student-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media (max-width:768px){
+
+.student-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media (max-width:500px){
+
+.student-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+/* ===========================
+   ULANG TAHUN TERDEKAT
+=========================== */
+
+.birthday-card{
+
+    max-width:700px;
+
+    margin:35px auto;
+
+    padding:22px 25px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.07);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+}
+
+.birthday-photo img{
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+    object-fit:cover;
+
+    border:3px solid #3b82f6;
+}
+
+.birthday-info{
+    flex:1;
+}
+
+.birthday-info h2{
+    color:#60a5fa;
+    margin-bottom:8px;
+    font-size:22px;
+}
+
+#nextBirthdayName{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+#nextBirthdayDate{
+    color:#cbd5e1;
+    margin-bottom:12px;
+}
+
+#countdownBirthday{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:25px;
+    background:#2563eb;
+    font-weight:600;
+    font-size:14px;
+}
+
+/* HP */
+
+@media(max-width:600px){
+
+.birthday-card{
+    flex-direction:column;
+    text-align:center;
+}
+
+.birthday-info{
+    text-align:center;
+}
 
 }
